@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Persistence\Eloquent\Repositories;
 
-use App\Domain\Repositories\AppointmentRepositoryInterface;
 use App\Domain\Entities\Appointment;
+use App\Domain\Repositories\AppointmentRepositoryInterface;
 use App\Infrastructure\Persistence\Eloquent\Models\EloquentAppointment;
 use Carbon\CarbonInterface;
 use DateTimeImmutable;

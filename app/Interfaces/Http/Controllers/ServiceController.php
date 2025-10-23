@@ -7,7 +7,9 @@ use Illuminate\Http\JsonResponse;
 
 class ServiceController
 {
-    public function __construct(private ServiceRepositoryInterface $services) {}
+    public function __construct(private ServiceRepositoryInterface $services)
+    {
+    }
 
     public function index(): JsonResponse
     {

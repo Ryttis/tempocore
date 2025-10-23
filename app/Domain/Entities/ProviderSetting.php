@@ -15,6 +15,6 @@ final class ProviderSetting
         public int $bufferAfterMinutes,
         public int $cancellationCutoffMinutes,
         public string $timezone,
-    ) {}
+    ) {
+    }
 }
-

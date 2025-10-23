@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Persistence\Eloquent\Repositories;
 
-use App\Domain\Repositories\ProviderSettingRepositoryInterface;
 use App\Domain\Entities\ProviderSetting;
+use App\Domain\Repositories\ProviderSettingRepositoryInterface;
 use App\Infrastructure\Persistence\Eloquent\Models\EloquentProviderSetting;
 
 final class EloquentProviderSettingRepository implements ProviderSettingRepositoryInterface

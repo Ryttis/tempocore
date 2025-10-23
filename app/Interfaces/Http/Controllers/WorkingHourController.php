@@ -2,8 +2,8 @@
 
 namespace App\Interfaces\Http\Controllers;
 
-use App\Interfaces\Http\Requests\CreateWorkingHourRuleRequest;
 use App\Infrastructure\Persistence\Eloquent\Models\EloquentWorkingHourRule;
+use App\Interfaces\Http\Requests\CreateWorkingHourRuleRequest;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 

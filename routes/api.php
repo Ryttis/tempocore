@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Interfaces\Http\Controllers\{
-    ServiceController,
-    AvailabilityController,
     AppointmentController,
+    AvailabilityController,
+    ServiceController,
     WorkingHourController
 };
+use Illuminate\Support\Facades\Route;
 
 Route::get('/services', [ServiceController::class, 'index']);
 

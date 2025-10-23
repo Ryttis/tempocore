@@ -14,9 +14,10 @@ final class SlotGenerator
     /**
      * Generate available slots for a given set of open intervals.
      *
-     * @param TimeRange[] $openIntervals
+     * @param TimeRange[]         $openIntervals
      * @param AvailabilityContext $context
-     * @return SlotDto[]  List of available booking slots
+     *
+     * @return SlotDto[] List of available booking slots
      */
     public function generate(array $openIntervals, AvailabilityContext $context): array
     {

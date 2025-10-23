@@ -30,4 +30,3 @@ final class TimeRange
         return $time >= $this->start && $time <= $this->end;
     }
 }
-

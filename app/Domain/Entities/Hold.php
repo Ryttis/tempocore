@@ -10,6 +10,6 @@ final class Hold
         public \DateTimeImmutable $startsAt,
         public \DateTimeImmutable $endsAt,
         public \DateTimeImmutable $expiresAt,
-    ) {}
+    ) {
+    }
 }
-

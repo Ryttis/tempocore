@@ -21,7 +21,7 @@ final class DateRange
     /**
      * Returns all dates between startDate and endDate (inclusive).
      *
-     * @return DateTimeImmutable[]  List of DateTimeImmutable objects, one per day.
+     * @return DateTimeImmutable[] List of DateTimeImmutable objects, one per day.
      */
     public function days(): array
     {

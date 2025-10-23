@@ -14,7 +14,8 @@ final class BookingService
     public function __construct(
         private AppointmentRepositoryInterface $appointments,
         private ServiceRepositoryInterface $services,
-    ) {}
+    ) {
+    }
 
     public function book(
         int $serviceId,

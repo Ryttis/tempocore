@@ -11,6 +11,6 @@ final class SlotDto
         public DateTimeImmutable $endUtc,
         public string $startLocal,
         public string $endLocal,
-    ) {}
+    ) {
+    }
 }
-

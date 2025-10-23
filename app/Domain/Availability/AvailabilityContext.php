@@ -77,8 +77,9 @@ final class AvailabilityContext
     /**
      * Convert appointments and holds into local-time TimeRange objects.
      *
-     * @param array<int, object> $appointments  objects with ->startsAt, ->endsAt
-     * @param array<int, array{0:mixed,1:mixed}> $holds [startUtc, endUtc]
+     * @param array<int, object>                 $appointments objects with ->startsAt, ->endsAt
+     * @param array<int, array{0:mixed,1:mixed}> $holds        [startUtc, endUtc]
+     *
      * @return TimeRange[]
      */
     public function busyLocalRanges(array $appointments, array $holds): array

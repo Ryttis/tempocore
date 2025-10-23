@@ -13,10 +13,11 @@ interface AppointmentRepositoryInterface
     /**
      * Find appointments overlapping with a given time range for a specific service.
      *
-     * @param int $serviceId
+     * @param int               $serviceId
      * @param DateTimeImmutable $start
      * @param DateTimeImmutable $end
-     * @return Appointment[]  List of overlapping appointments
+     *
+     * @return Appointment[] List of overlapping appointments
      */
     public function findOverlapping(int $serviceId, DateTimeImmutable $start, DateTimeImmutable $end): array;
 
@@ -24,7 +25,8 @@ interface AppointmentRepositoryInterface
      * Persist a new appointment entity.
      *
      * @param Appointment $appointment
-     * @return Appointment  The created appointment entity
+     *
+     * @return Appointment The created appointment entity
      */
     public function create(Appointment $appointment): Appointment;
 
@@ -33,7 +35,8 @@ interface AppointmentRepositoryInterface
      *
      * @param DateTimeImmutable $startUtc
      * @param DateTimeImmutable $endUtc
-     * @return Appointment[]  List of appointments within the range
+     *
+     * @return Appointment[] List of appointments within the range
      */
     public function findByDateRange(DateTimeImmutable $startUtc, DateTimeImmutable $endUtc): array;
 }

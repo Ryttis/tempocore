@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Infrastructure\Persistence\Eloquent\Models\EloquentService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Infrastructure\Persistence\Eloquent\Models\EloquentService;
 
 class BookingTest extends TestCase
 {

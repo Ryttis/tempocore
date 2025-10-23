@@ -2,15 +2,15 @@
 
 namespace Tests\Feature;
 
+use App\Infrastructure\Persistence\Eloquent\Models\{
+    EloquentProviderSetting,
+    EloquentService,
+    EloquentWorkingHourRule
+};
+use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
-use Carbon\Carbon;
-use App\Infrastructure\Persistence\Eloquent\Models\{
-    EloquentService,
-    EloquentWorkingHourRule,
-    EloquentProviderSetting
-};
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AvailabilityTest extends TestCase
 {
@@ -45,8 +45,8 @@ class AvailabilityTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    ['startUtc', 'endUtc', 'startLocal', 'endLocal']
-                ]
+                    ['startUtc', 'endUtc', 'startLocal', 'endLocal'],
+                ],
             ]);
     }
 }

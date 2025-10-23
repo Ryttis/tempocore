@@ -10,4 +10,3 @@ interface ServiceRepositoryInterface
     /** @return Service[] */
     public function all(): array;
 }
-

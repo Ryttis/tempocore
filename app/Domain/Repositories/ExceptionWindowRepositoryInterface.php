@@ -10,4 +10,3 @@ interface ExceptionWindowRepositoryInterface
     /** @return ExceptionWindow[] */
     public function getForDate(DateTimeImmutable $date): array;
 }
-

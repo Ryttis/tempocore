@@ -4,18 +4,22 @@ namespace App\Providers;
 
 use App\Domain\Availability\IntervalMath;
 use App\Domain\Entities\ProviderSetting;
-use App\Domain\Repositories\{AppointmentRepositoryInterface,
+use App\Domain\Repositories\{
+    AppointmentRepositoryInterface,
     ExceptionWindowRepositoryInterface,
+    ProviderSettingRepositoryInterface,
     ServiceRepositoryInterface,
-    WorkingHourRepositoryInterface,
-    ProviderSettingRepositoryInterface};
+    WorkingHourRepositoryInterface
+};
 use App\Domain\Repositories\HoldRepositoryInterface;
 use App\Infrastructure\Persistence\Eloquent\Models\EloquentProviderSetting;
-use App\Infrastructure\Persistence\Eloquent\Repositories\{EloquentAppointmentRepository,
+use App\Infrastructure\Persistence\Eloquent\Repositories\{
+    EloquentAppointmentRepository,
     EloquentExceptionWindowRepository,
+    EloquentProviderSettingRepository,
     EloquentServiceRepository,
-    EloquentWorkingHourRepository,
-    EloquentProviderSettingRepository};
+    EloquentWorkingHourRepository
+};
 use App\Infrastructure\Persistence\Eloquent\Repositories\EloquentHoldRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -45,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
                     timezone: config('app.timezone', 'UTC'),
                 );
             }
+
             return new ProviderSetting(
                 id: $row->id,
                 slotGranularity: (int)$row->slot_granularity,
@@ -58,5 +63,7 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    public function boot(): void {}
+    public function boot(): void
+    {
+    }
 }

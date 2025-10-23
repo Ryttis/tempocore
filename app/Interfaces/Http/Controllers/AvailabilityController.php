@@ -5,15 +5,16 @@ namespace App\Interfaces\Http\Controllers;
 use App\Domain\Repositories\ProviderSettingRepositoryInterface;
 use App\Services\AvailabilityService;
 use DateTimeImmutable;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 final class AvailabilityController
 {
     public function __construct(
         private readonly AvailabilityService $availability,
         private readonly ProviderSettingRepositoryInterface $settings,
-    ) {}
+    ) {
+    }
 
     public function index(Request $request): JsonResponse
     {

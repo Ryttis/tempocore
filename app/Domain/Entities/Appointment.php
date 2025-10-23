@@ -13,6 +13,6 @@ final class Appointment
         public string $status = 'confirmed',
         public ?string $clientName = null,
         public ?string $clientPhone = null,
-    ) {}
+    ) {
+    }
 }
-

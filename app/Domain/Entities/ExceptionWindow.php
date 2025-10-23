@@ -10,8 +10,6 @@ final class ExceptionWindow
         public ?string            $startTime,
         public ?string            $endTime,
         public string             $type,
-    )
-    {
+    ) {
     }
 }
-

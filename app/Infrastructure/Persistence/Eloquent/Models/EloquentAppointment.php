@@ -21,4 +21,3 @@ class EloquentAppointment extends Model
         'ends_at_utc'   => 'datetime',
     ];
 }
-

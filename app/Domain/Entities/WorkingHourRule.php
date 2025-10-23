@@ -9,6 +9,6 @@ final class WorkingHourRule
         public int $dayOfWeek,
         public string $startTime,
         public string $endTime,
-    ) {}
+    ) {
+    }
 }
-

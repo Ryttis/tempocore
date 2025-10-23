@@ -8,7 +8,9 @@ use Illuminate\Http\JsonResponse;
 
 class AppointmentController
 {
-    public function __construct(private BookingService $booking) {}
+    public function __construct(private BookingService $booking)
+    {
+    }
 
     public function store(CreateAppointmentRequest $request): JsonResponse
     {

@@ -18,6 +18,7 @@ interface HoldRepositoryInterface
      *
      * @param DateTimeImmutable $startUtc
      * @param DateTimeImmutable $endUtc
+     *
      * @return array<int, array{0: DateTimeImmutable, 1: DateTimeImmutable}>
      */
     public function activeByRange(DateTimeImmutable $startUtc, DateTimeImmutable $endUtc): array;

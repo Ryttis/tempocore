@@ -14,6 +14,7 @@ final class IntervalMath
      * Merge overlapping or contiguous time ranges.
      *
      * @param TimeRange[] $ranges
+     *
      * @return TimeRange[]
      */
     public function merge(array $ranges): array
@@ -22,7 +23,7 @@ final class IntervalMath
             return [];
         }
 
-        usort($ranges, fn(TimeRange $left, TimeRange $right) => $left->start <=> $right->start);
+        usort($ranges, fn (TimeRange $left, TimeRange $right) => $left->start <=> $right->start);
 
         $mergedRanges = [$ranges[0]];
 
@@ -50,6 +51,7 @@ final class IntervalMath
      *
      * @param TimeRange[] $baseRanges
      * @param TimeRange[] $rangesToSubtract
+     *
      * @return TimeRange[]
      */
     public function subtract(array $baseRanges, array $rangesToSubtract): array

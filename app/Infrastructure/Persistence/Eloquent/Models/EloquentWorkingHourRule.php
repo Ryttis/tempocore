@@ -3,8 +3,8 @@
 namespace App\Infrastructure\Persistence\Eloquent\Models;
 
 use Database\Factories\EloquentWorkingHourRuleFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Eloquent model representing a provider's working hour rule.

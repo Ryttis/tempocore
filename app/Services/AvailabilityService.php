@@ -9,7 +9,8 @@ use App\Domain\Repositories\{AppointmentRepositoryInterface,
     ExceptionWindowRepositoryInterface,
     HoldRepositoryInterface,
     ServiceRepositoryInterface,
-    WorkingHourRepositoryInterface};
+    WorkingHourRepositoryInterface
+};
 use App\Domain\ValueObjects\TimeRange;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
@@ -25,8 +26,7 @@ final class AvailabilityService
         private readonly HoldRepositoryInterface            $holds,
         private readonly SlotGenerator                      $slotGenerator,
         private readonly IntervalMath                       $math,
-    )
-    {
+    ) {
     }
 
     /** @return SlotDto[] */
@@ -34,10 +34,11 @@ final class AvailabilityService
         DateTimeImmutable $day,
         int               $serviceId,
         ProviderSetting   $settings
-    ): array
-    {
+    ): array {
         $service = $this->services->find($serviceId);
-        if (!$service) return [];
+        if (!$service) {
+            return [];
+        }
 
         $context = new AvailabilityContext(
             $service,
@@ -55,48 +56,70 @@ final class AvailabilityService
         return $this->slotGenerator->generate($open, $context);
     }
 
+    /**
+     * @return TimeRange[]
+     */
     private function computeOpenIntervals(AvailabilityContext $ctx): array
     {
-        $rules = $this->workingHours->getByDayOfWeek($ctx->localDay->dayOfWeek);
+        $rules = $this->workingHours->getByDayOfWeek($ctx->localDayStart->dayOfWeek);
         $intervals = [];
 
         foreach ($rules as $r) {
             $start = $ctx->atLocalTime($r->startTime);
             $end = $ctx->atLocalTime($r->endTime);
-            if ($end <= $start) continue;
+            if ($end <= $start) {
+                continue;
+            }
             $intervals[] = new TimeRange($start, $end);
         }
 
         return $this->math->merge($intervals);
     }
 
+    /**
+     * @param TimeRange[] $open
+     *
+     * @return TimeRange[]
+     */
     private function applyExceptions(array $open, AvailabilityContext $ctx): array
     {
-        $exceptions = $this->exceptions->getForDate($ctx->localDay);
+        $exceptions = $this->exceptions->getForDate($ctx->localDayStart);
         $adds = $subs = [];
 
         foreach ($exceptions as $ex) {
             $range = $ctx->buildExceptionRange($ex);
-            if ($ex->type === 'open') $adds[] = $range;
-            else $subs[] = $range;
+            if ($ex->type === 'open') {
+                $adds[] = $range;
+            } else {
+                $subs[] = $range;
+            }
         }
 
-        if ($adds) $open = $this->math->merge(array_merge($open, $adds));
-        if ($subs) $open = $this->math->subtract($open, $subs);
+        if ($adds) {
+            $open = $this->math->merge(array_merge($open, $adds));
+        }
+        if ($subs) {
+            $open = $this->math->subtract($open, $subs);
+        }
 
         return $open;
     }
 
+    /**
+     * @param TimeRange[] $open
+     *
+     * @return TimeRange[]
+     */
     private function subtractBusyIntervals(array $open, AvailabilityContext $ctx): array
     {
         [$dayStartUtc, $dayEndUtc] = $ctx->dayUtcRange();
 
-$aa = $this->appointments->findByDateRange($dayStartUtc, $dayEndUtc);
+        $appointments = $this->appointments->findByDateRange($dayStartUtc, $dayEndUtc);
 
-$bb = $this->holds->activeByRange($dayStartUtc, $dayEndUtc);
+        $activeHolds = $this->holds->activeByRange($dayStartUtc, $dayEndUtc);
         $busyLocal = $ctx->busyLocalRanges(
-            $aa,
-            $bb
+            $appointments,
+            $activeHolds
         );
 
         return $busyLocal ? $this->math->subtract($open, $busyLocal) : $open;

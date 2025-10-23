@@ -10,6 +10,6 @@ final class Service
         public int $durationMinutes,
         public ?float $price = null,
         public ?string $color = null,
-    ) {}
+    ) {
+    }
 }
-
