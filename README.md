@@ -122,5 +122,19 @@ npm run build
 php artisan config:cache
 php artisan route:cache
 php artisan migrate --force
+```` 
+
+## 🚧 Incomplete Features / Next Steps
+
+Some parts of the system are not fully implemented yet but have a clear planned direction:
+
+Exception & Hold Management UI –
+Backend logic for holds and exception windows exists, but there’s no frontend interface to manage them.
+🔧 Plan: Extend admin panel or create separate Vue pages for managing provider availability exceptions.
+
+Currently, the project includes two feature tests verifying main booking flows, but no dedicated unit 
+tests are implemented yet for individual domain services or value objects.
+🔧 Plan: Add unit tests for core domain logic — especially AvailabilityService, 
+IntervalMath, and SlotGenerator — using mock repositories to isolate logic from the database.
 
 
