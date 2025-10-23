@@ -68,6 +68,8 @@ DB_PASSWORD=
 # 5. Run migrations and seeders
 php artisan migrate --seed
 
+Ensure required directories exist if not install:
+mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache
 # 6. Start local server
 php artisan serve
 
