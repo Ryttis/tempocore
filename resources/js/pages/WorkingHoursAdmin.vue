@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import {ref, onMounted} from 'vue'
 import axios from 'axios'
 
 const workingHours = ref([])
@@ -38,49 +38,97 @@ onMounted(loadWorkingHours)
 </script>
 
 <template>
-    <section style="padding:20px; font-family:sans-serif;">
-        <h2 style="margin:0 0 16px;">Admin: Working Hours</h2>
+    <section style="padding:32px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <h2 style="margin:0 0 20px; font-size:22px; font-weight:600;">Admin: Working Hours</h2>
 
-        <form @submit.prevent="addRule"
-              style="display:grid; grid-template-columns: 1fr 1fr 1fr 120px; gap:8px; align-items:end; max-width:720px;">
-            <div>
+        <form
+            @submit.prevent="addRule"
+            style="
+            display: flex;
+            gap: 16px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            background: #fafafa;
+            border: 1px solid #e5e7eb;
+            padding: 16px;
+            border-radius: 10px;
+            max-width: 740px;
+  "
+        >
+            <div style="flex: 1 1 150px; min-width: 120px;">
                 <label style="display:block; font-weight:600; margin-bottom:6px;">Day of week</label>
-                <select v-model.number="form.day_of_week" style="width:100%; padding:8px;">
-                    <option v-for="(d,idx) in ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']"
-                            :key="idx" :value="idx">{{ d }}</option>
+                <select
+                    v-model.number='form.day_of_week'
+                    style="width:100%; padding:8px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:14px;"
+                >
+                    <option v-for="(d,idx) in ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']" :key="idx" :value="idx">{{
+                            d
+                        }}
+                    </option>
                 </select>
             </div>
-            <div>
+
+            <div style="flex: 3 1 120px; min-width: 100px;">
                 <label style="display:block; font-weight:600; margin-bottom:6px;">Start</label>
-                <input v-model="form.start_time" type="time" style="width:100%; padding:8px;" />
+                <input
+                    v-model="form.start_time"
+                    type="time"
+                    style="width:80%; padding:8px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:14px;"
+                />
             </div>
-            <div>
+
+            <div style="flex: 1 1 120px; min-width: 100px;">
                 <label style="display:block; font-weight:600; margin-bottom:6px;">End</label>
-                <input v-model="form.end_time" type="time" style="width:100%; padding:8px;" />
+                <input
+                    v-model="form.end_time"
+                    type="time"
+                    style="width:90%; margin-right: 10px; padding:8px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:14px;"
+                />
             </div>
-            <button
-                :disabled="saving"
-                type="submit"
-                style="padding:10px 12px; border:0; border-radius:8px; background:#2563eb; color:white; cursor:pointer;">
-                Add
-            </button>
+
+            <div style="flex: 0 0 60px;">
+                <button
+                    :disabled="saving"
+                    type="submit"
+                    style="
+                    margin-left: 10px;
+                    width:100%;
+                    padding:10px 6px;
+                    border:0;
+                    border-radius:6px;
+                    background:#2563eb;
+                    color:white;
+                    font-weight:600;
+                    cursor:pointer;
+                    transition:background .2s;
+      "
+                    @mouseover="!saving && ($event.target.style.background='#1e40af')"
+                    @mouseleave="!saving && ($event.target.style.background='#2563eb')"
+                >
+                    {{ saving ? 'Saving…' : 'Add' }}
+                </button>
+            </div>
         </form>
 
-        <p v-if="errorMessage" style="color:#991b1b; margin-top:8px;">{{ errorMessage }}</p>
 
-        <div style="margin-top:24px;">
-            <h3 style="margin:0 0 8px; font-size:16px;">Existing rules</h3>
-            <table style="width:100%; border-collapse:collapse;">
+        <p v-if="errorMessage" style="color:#b91c1c; margin-top:10px;">{{ errorMessage }}</p>
+
+        <div style="margin-top:32px;">
+            <h3 style="margin:0 0 10px; font-size:18px; font-weight:600;">Existing Rules</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
                 <thead>
-                <tr>
-                    <th style="text-align:left; border-bottom:1px solid #eee; padding:8px;">Day</th>
-                    <th style="text-align:left; border-bottom:1px solid #eee; padding:8px;">Start</th>
-                    <th style="text-align:left; border-bottom:1px solid #eee; padding:8px;">End</th>
+                <tr style="background:#f9fafb;">
+                    <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:8px;">Day</th>
+                    <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:8px;">Start</th>
+                    <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:8px;">End</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="row in workingHours" :key="row.id">
-                    <td style="padding:8px;">{{ ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][row.day_of_week] }}</td>
+                <tr v-for="row in workingHours" :key="row.id" style="border-bottom:1px solid #f1f1f1;">
+                    <td style="padding:8px;">{{
+                            ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][row.day_of_week]
+                        }}
+                    </td>
                     <td style="padding:8px;">{{ row.start_time }}</td>
                     <td style="padding:8px;">{{ row.end_time }}</td>
                 </tr>
