@@ -21,4 +21,12 @@ class WorkingHourController
     {
         return EloquentWorkingHourRule::create($request->validated());
     }
+    public function update(CreateWorkingHourRuleRequest $request, int $id): Model
+    {
+        $rule = EloquentWorkingHourRule::findOrFail($id);
+        $rule->update($request->validated());
+
+        return $rule;
+    }
+
 }
